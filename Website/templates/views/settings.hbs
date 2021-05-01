@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Logout</title>
+	<link rel="stylesheet" href="css/dashboard.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<div class="text">
+				<p>You have been logged out</p>
+			</div>
+			<hr class="hr-outside-prod">
+			<div class="tail">
+				<img src="images/logo.png" style="width:250px;height:300px;">
+			</div>
+		</div>
+</body>
+<style>
+	* {
+		margin: 0px;
+		padding: 0px;
+		box-sizing: border-box;
+	}
+
+	body {
+		font-family: 'Exo';
+		font-size: 22px;
+	}
+
+	.container-login100 {
+		width: 100%;
+		min-height: 100vh;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		padding: 15px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.wrap-login100 {
+		width: 620px;
+		height: 450px;
+		left: 495px;
+		top: 204px;
+		border: 2px solid #008580;
+		background-color: rgba(0, 0, 0, 0.8);
+		border-radius: 10px;
+		overflow: hidden;
+
+		box-shadow: 0px 4px 16px 18px rgba(0, 0, 0, 0.7);
+		-moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+		-webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+		-o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+		-ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+	}
+
+	.text {
+		padding-top: 30px;
+		position: relative;
+		text-align: center;
+		font-size: 35px;
+		color: white;
+		text-shadow: 1px 1px black;
+		padding-bottom: 5px;
+	}
+
+	.tail {
+		padding-top: 0px;
+		position: relative;
+		margin-left: 25%;
+	}
+
+	@media screen and (max-width: 1400px) {
+		.tail {
+			position: absolute;
+			top: 50px;
+			margin-left: 11%;
+		}
+
+		img {
+			width: 200px;
+			position: absolute;
+			top: 200px;
+			left: 10px;
+		}
+</style>
+
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    {{>header}}
+
+    <div id="icon">
+        <img class="hide" src="https://cdn.discordapp.com/attachments/744428899928113227/831756692789133322/logo.png"
+            style="width:150px;height:200px;">
+    </div>
+
+    <div id="icon1">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/831756351982010378/Category.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="icon2">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/831756643280617482/Buy.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="icon3">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/831756678391136297/Swap.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="icon4">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/834518500840046592/Logout.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <section id="section-functionality">
+        <div id="latest-transactions-container">
+            <div class="title">
+                <h1>Latest transactions</h1>
+                <hr>
+            </div>
+            <ul id="latest-transactions-ul">
+            </ul>
+        </div>
+        <div id="inv-tracking-container">
+            <div class="title">
+                <h1>Inventory tracking</h1>
+                <hr>
+            </div>
+
+            <div id="inventory">
+                <div id="total-drinks-inv">
+                    <h2>Total drinks in inventory:</h2>
+                    <p id="total-drinks">Loading...</p>
+                </div>
+                <div id="total-cocktails-left">
+                    <h2>Total drinks left per cocktail:</h2>
+                    <div id="every-cocktail-supply">
+                        <ul id="cocktails-ul">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/dashboard.js"></script>
+
+    <style>
+        #total-cocktails-left>.cocktail {
+            font-family: Exo-Regular;
+            font-style: normal;
+            font-weight: 1;
+            font-size: 20px;
+            line-height: 27px;
+            display: flex;
+            align-items: center;
+
+            color: #FFFFFF;
+        }
+
+        #total-drinks {
+            font-family: Exo2-Light;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 36px;
+            align-items: center;
+            text-align: center;
+
+            color: #00D6CE;
+        }
+
+        #type {
+            font-family: Exo2-Light;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 20px;
+            align-items: center;
+            text-align: center;
+
+            color: #383838;
+        }
+
+        #inventory {
+            position: relative;
+            justify-content: center;
+        }
+
+        #total-drinks-inv>h2 {
+            position: relative;
+            margin-top: 55px;
+
+        }
+
+        #total-cocktails-left>h2 {
+            position: relative;
+            margin-top: 55px;
+        }
+
+        #total-cocktails-left>ul {
+            display: flex;
+            align-items: left;
+        }
+
+        #latest-transactions-ul {
+            top: 1%;
+            position: relative;
+            justify-content: center;
+            overflow: auto;
+            height: 90%;
+
+        }
+
+        #latest-transactions-ul::-webkit-scrollbar {
+            background-color: #202324;
+        }
+
+        #latest-transactions-ul::-webkit-scrollbar-thumb {
+            background-color: #454a4d;
+        }
+
+        #cocktails-ul {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 0px;
+            margin-left: 20px;
+            overflow: auto;
+            max-height: 400px;
+            margin-top: 10px;
+        }
+
+        #latest-transactions-ul>li {
+            list-style-type: none;
+            text-align: left;
+            padding: 10px;
+            font-family: Exo2-Light;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 27px;
+            line-height: 32px;
+        }
+
+        #cocktails-ul>li {
+            list-style-type: none;
+        }
+
+        #dashboard {
+            font-family: "Exo 2", sans-serif;
+            color: white;
+        }
+
+        #section-functionality {
+            position: relative;
+            display: flex;
+            top: 145px;
+            justify-content: center;
+        }
+
+        #latest-transactions-container {
+            position: relative;
+            width: 502px;
+            height: 700px;
+
+            margin-left: 9%;
+            margin-right: 9%;
+
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00d6ce;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 16px 18px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            /* Note: backdrop-filter has minimal browser support */
+
+            border-radius: 10px;
+        }
+
+        #inv-tracking-container {
+            position: relative;
+            width: 502px;
+            height: 700px;
+
+            margin-left: 9%;
+            margin-right: 9%;
+
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00d6ce;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 16px 18px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            /* Note: backdrop-filter has minimal browser support */
+
+            border-radius: 10px;
+        }
+
+        .amountBought {
+            font-family: Exo2-ExtraLight;
+            font-style: normal;
+            font-weight: 200;
+            font-size: 27px;
+            line-height: 32px;
+            align-items: center;
+
+            color: #00D6CE;
+        }
+
+        .amountSupply {
+            font-family: Exo-Regular;
+            font-style: normal;
+            font-weight: 1;
+            font-size: 20px;
+            line-height: 27px;
+            align-items: center;
+
+            color: #05FF00;
+        }
+
+        .cocktailBought {
+            font-family: Exo2-Light;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 27px;
+            line-height: 32px;
+            align-items: center;
+
+            color: #FFFFFF;
+        }
+
+        .cocktailInSupply {
+            font-family: Exo2-Light;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 24px;
+            align-items: center;
+
+            color: #FFFFFF;
+        }
+
+        .date {
+            font-family: Exo2-ExtraLight;
+            font-style: normal;
+            font-weight: 200;
+            font-size: 15px;
+            line-height: 32px;
+            align-items: center;
+
+            color: #FFFFFF;
+        }
+
+        h2 {
+            font-family: Exo2-ExtraLight;
+            font-style: normal;
+            font-weight: 200;
+            font-size: 28px;
+            line-height: 34px;
+            /* identical to box height */
+
+            align-items: center;
+            text-align: center;
+
+            color: #FFFFFF;
+        }
+
+        #icon {
+            position: absolute;
+            display: flex;
+            justify-content: left;
+            margin-left: 5%;
+            top: 0px;
+        }
+
+        #icon1 {
+            position: absolute;
+            display: flex;
+            justify-content: left;
+            margin-left: 30.5%;
+            top: 80px;
+            border-bottom: 2px solid grey;
+        }
+
+        #icon2 {
+            position: absolute;
+            display: flex;
+            justify-content: left;
+            margin-left: 44%;
+            top: 80px;
+            opacity: 0.3;
+        }
+
+        #icon3 {
+            position: absolute;
+            display: flex;
+            justify-content: left;
+            margin-left: 56.7%;
+            top: 80px;
+            opacity: 0.3;
+        }
+
+        #icon4 {
+            position: absolute;
+            display: flex;
+            justify-content: left;
+            margin-left: 69%;
+            top: 80px;
+            opacity: 0.3;
+        }
+
+        @media screen and (max-width: 1400px) {
+            #icon1 {
+                margin-left: 26.3%;
+            }
+        }
+
+        @media screen and (max-width: 1400px) {
+            #icon2 {
+                margin-left: 42.7%;
+            }
+        }
+
+        @media screen and (max-width: 1400px) {
+            #icon3 {
+                margin-left: 58.3%;
+            }
+        }
+
+        @media screen and (max-width: 1400px) {
+            #icon4 {
+                margin-left: 73.2%;
+            }
+        }
+    </style>
+</body>
+
+</html>

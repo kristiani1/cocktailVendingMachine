@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    {{>header}}
+
+    <div id="icon">
+        <img class="hide" src="https://cdn.discordapp.com/attachments/744428899928113227/831756692789133322/logo.png"
+            style="width:150px;height:200px;">
+    </div>
+
+    <div id="icon1">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/831756351982010378/Category.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="icon2">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/831756643280617482/Buy.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="icon3">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/831756678391136297/Swap.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="icon4">
+        <img src="https://cdn.discordapp.com/attachments/744428899928113227/834518500840046592/Logout.png"
+            style="width:30px;height:30px;">
+    </div>
+
+    <div id="manage-products-wrapper">
+        <div id="manage-products-container">
+            <div class="title">
+                <h1>Manage products</h1>
+                <hr>
+            </div>
+            <div id="products-manager">
+                <table id="products-table">
+                    <tr>
+                        <th>Product</th>
+                        <th>Supply (app.)</th>
+                        <th>Price/250ml</th>
+                        <th>Red</th>
+                        <th>Green</th>
+                        <th>Blue</th>
+                        <th>Delete?</th>
+                        <th>Modify?</th>
+                    </tr>
+                </table>
+                <p id="hasLoaded">Loading...</p>
+            </div>
+
+            <div id="add-products">
+                <table id="add-products-table">
+                    <tr>
+                        <th><input type="text" id="product-name" placeholder="Product name..." required></th>
+                        <th><input type="number" id="product-supply" placeholder="Current supply..." required></th>
+                        <th><input type="number" id="product-price" placeholder="Price per 250ml (€)..." required></th>
+                    </tr>
+                </table>
+                <button type="button" id="add-btn">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/products.js"></script>
+
+</body>
+
+<style>
+    .modify-btn {
+        background: url(https://cdn.discordapp.com/attachments/744428899928113227/836042480326541322/thumbnail.png) no-repeat;
+        background-size: cover;
+        cursor: pointer;
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        opacity: 0.5;
+    }
+
+    .modify-btn:hover {
+        opacity: 1;
+    }
+
+
+    .delete-btn {
+        background: url(https://cdn.discordapp.com/attachments/744428899928113227/834518537640869908/Close_Square.png) no-repeat;
+        background-size: cover;
+        cursor: pointer;
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        opacity: 0.5;
+    }
+
+    .delete-btn:hover {
+        opacity: 1;
+    }
+
+    .submit-btn {
+        font-family: NunitoSans-Bold;
+        color: #FFFFFF;
+        background: none;
+        border: 2px solid rgba(5, 255, 0, 0.3);
+    }
+
+    .submit-btn:hover {
+        transition: all .4s ease-in-out;
+        background: none;
+        border: 2px solid #05FF00;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    input {
+        width: 110px;
+    }
+
+    #product-name,
+    #product-supply,
+    #product-price {
+        width: 150px;
+    }
+
+    #add-products {
+        position: relative;
+        top: 15%;
+        overflow-x: auto;
+        height: 80px;
+    }
+
+    #add-btn {
+        transition: color .3s ease-out;
+        transition: border-radius .5s ease-out;
+        font-family: NunitoSans-Regular;
+        position: relative;
+        display: block;
+        margin: auto;
+
+        top: 5px;
+
+        color: rgba(255, 255, 255, 0.3);
+
+        border: 2px solid rgba(5, 255, 0, 0.3);
+        border-radius: 50px;
+        font-size: 20px;
+
+        background: transparent;
+
+
+    }
+
+    #add-btn:hover {
+        transition: all .4s ease-in-out;
+
+        color: #FFFFFF;
+        border: 2px solid #05FF00;
+
+        border-radius: 0px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    #add-products-table {
+        margin: auto;
+    }
+
+    input {
+        background: transparent;
+        color: white;
+    }
+
+    p {
+        font-family: Exo2-Regular;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 36px;
+        align-items: center;
+        text-align: center;
+
+        color: #00D6CE;
+    }
+
+    #products-manager {
+        position: relative;
+        overflow: auto;
+        height: 60%;
+        top: 44px;
+    }
+
+    table {
+        position: relative;
+        border-collapse: collapse;
+        width: 75%;
+        border: 1px solid white;
+    }
+
+    th {
+        font-family: Exo2-ExtraBold;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 20px;
+
+        color: #FFFFFF;
+        padding: 8px;
+        border: 1px solid white;
+
+    }
+
+    td {
+        font-family: Exo2-Regular;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #FFFFFF;
+        border: 1px solid white;
+
+        padding: 8px;
+    }
+
+    #products-table {
+        margin: auto;
+    }
+
+    #manage-products-wrapper {
+        position: relative;
+        display: flex;
+
+        justify-content: center;
+        top: 141px;
+    }
+
+    #manage-products-container {
+        width: 55%;
+        height: 652px;
+
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid #00D6CE;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 16px 18px rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(3px);
+        /* Note: backdrop-filter has minimal browser support */
+
+        border-radius: 10px;
+    }
+
+    #products {
+        font-family: "Exo 2", sans-serif;
+        color: white;
+    }
+
+    #icon {
+        position: absolute;
+        display: flex;
+        justify-content: left;
+        margin-left: 5%;
+        top: 0px;
+    }
+
+    #icon1 {
+        position: absolute;
+        display: flex;
+        justify-content: left;
+        margin-left: 30.5%;
+        top: 80px;
+        opacity: 0.3;
+    }
+
+    #icon2 {
+        position: absolute;
+        display: flex;
+        justify-content: left;
+        margin-left: 44%;
+        top: 80px;
+        border-bottom: 2px solid grey;
+    }
+
+    #icon3 {
+        position: absolute;
+        display: flex;
+        justify-content: left;
+        margin-left: 56.7%;
+        top: 80px;
+        opacity: 0.3;
+    }
+
+    #icon4 {
+        position: absolute;
+        display: flex;
+        justify-content: left;
+        margin-left: 69%;
+        top: 80px;
+        opacity: 0.3;
+    }
+
+    @media screen and (max-width: 1400px) {
+        #icon1 {
+            margin-left: 26.3%;
+        }
+    }
+
+    @media screen and (max-width: 1400px) {
+        #icon2 {
+            margin-left: 42.7%;
+        }
+    }
+
+    @media screen and (max-width: 1400px) {
+        #icon3 {
+            margin-left: 58.3%;
+        }
+    }
+
+    @media screen and (max-width: 1400px) {
+        #icon4 {
+            margin-left: 73.2%;
+        }
+    }
+</style>
+
+</html>
